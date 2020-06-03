@@ -1,0 +1,1209 @@
+<html lang="en">
+
+<head>
+    <title>Swapnil Nikule | Interactive Resume</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assests/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="manifest" href="assets/images/site.webmanifest">
+    <meta name="author" content="Swapnil Nikule">
+    <link rel="author" href="https://swapnilnikule.github.io" ">
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+
+                //Search for keywords within the user agent string.  When a match is found, add a corresponding class to the html element and return.  (Inspired by http://stackoverflow.com/a/10137912/114558)
+                function addUserAgentClass(keywords) {
+                    for (var i = 0; i < keywords.length; i++) {
+                        if (navigator.userAgent.indexOf(keywords[i]) != -1) {
+                            $(".nav-link-container-mobile").addClass(keywords[i]);
+                            return; //Once we find and process a matching keyword, return to prevent less "specific" classes from being added
+                        }
+                    }
+                }
+                addUserAgentClass(["Chrome", "Firefox", "MSIE", "Safari", "Opera", "Mozilla"]); //Browsers listed generally from most-specific to least-specific
+                addUserAgentClass(["Android", "iPhone", "iPad", "Linux", "Mac", "Windows"]); //Platforms, also in order of specificity
+
+                $(window).scroll(function () {
+                    var navbox = jQuery('#Navigation');
+                    var navboxh = jQuery('#nav-container-mobile');
+                    var prof = jQuery('#Profile').offset().top - $(window).scrollTop();
+                    var exper = jQuery('#Experience').offset().top - $(window).scrollTop();
+                    var skill = jQuery('#Skills').offset().top - $(window).scrollTop();
+                    var portf = jQuery('#Project').offset().top - $(window).scrollTop();
+                    var cont = jQuery('#Contact').offset().top - $(window).scrollTop();
+
+                    //make the nav bar float along with the page
+                    if (prof < 40) {
+                        navbox.addClass('nav-float');
+                        navbox.removeClass('nav-scroll');
+                    }
+
+                    if (prof < 1) {
+                        navboxh.addClass('nav-float-mobile');
+                        navboxh.removeClass('nav-scroll');
+                    }
+
+                    //make the nav bar lock back into position
+                    if (prof > 39) {
+                        navbox.addClass('nav-scroll');
+                        navbox.removeClass('nav-float');
+                    }
+
+                    if (prof > 0) {
+                        navboxh.addClass('nav-scroll');
+                        navboxh.removeClass('nav-float-mobile');
+                    }
+
+                    //profile
+                    if (exper > 0) {
+                        var element = jQuery('#nav-profile-link');
+                        var elementh = jQuery('#nav-profile-link-mobile')
+                        element.siblings('li').removeClass('nav-active inactiveLink');
+                        elementh.siblings('li').removeClass('nav-active inactiveLink');
+                        element.siblings('li').children('a').removeClass('nav-link-active');
+                        elementh.siblings('li').children('a').removeClass('nav-link-active');
+                        element.addClass('nav-active inactiveLink');
+                        elementh.addClass('nav-active inactiveLink');
+                        element.children('a').addClass("nav-link-active");
+                        elementh.children('a').addClass("nav-link-active");
+                    }
+                    //experience
+                    if (exper < 1 && skill > 0) {
+                        var element = jQuery('#nav-experience-link');
+                        var elementh = jQuery('#nav-experience-link-mobile');
+                        element.siblings('li').removeClass('nav-active inactiveLink');
+                        elementh.siblings('li').removeClass('nav-active inactiveLink');
+                        element.siblings('li').children('a').removeClass('nav-link-active');
+                        elementh.siblings('li').children('a').removeClass('nav-link-active');
+                        element.addClass('nav-active inactiveLink');
+                        elementh.addClass('nav-active inactiveLink');
+                        element.children('a').addClass("nav-link-active");
+                        elementh.children('a').addClass("nav-link-active");
+                    }
+                    //skills
+                    if (skill < 1 && portf > 0) {
+                        var element = jQuery('#nav-skills-link');
+                        var elementh = jQuery('#nav-skills-link-mobile');
+                        element.siblings('li').removeClass('nav-active inactiveLink');
+                        elementh.siblings('li').removeClass('nav-active inactiveLink');
+                        element.siblings('li').children('a').removeClass('nav-link-active');
+                        elementh.siblings('li').children('a').removeClass('nav-link-active');
+                        element.addClass('nav-active inactiveLink');
+                        elementh.addClass('nav-active inactiveLink');
+                        element.children('a').addClass("nav-link-active");
+                        elementh.children('a').addClass("nav-link-active");
+                    }
+                    //project
+                    if (portf < 1) {
+                        var element = jQuery('#nav-project-link');
+                        var elementh = jQuery('#nav-project-link-mobile');
+                        element.siblings('li').removeClass('nav-active inactiveLink');
+                        elementh.siblings('li').removeClass('nav-active inactiveLink');
+                        element.siblings('li').children('a').removeClass('nav-link-active');
+                        elementh.siblings('li').children('a').removeClass('nav-link-active');
+                        element.addClass('nav-active inactiveLink');
+                        elementh.addClass('nav-active inactiveLink');
+                        element.children('a').addClass("nav-link-active");
+                        elementh.children('a').addClass("nav-link-active");
+                    }
+
+                    //contact
+                    if (cont < 460) {
+                        var element = jQuery('#nav-contact-link');
+                        var elementh = jQuery('#nav-contact-link-mobile');
+                        element.siblings('li').removeClass('nav-active inactiveLink');
+                        elementh.siblings('li').removeClass('nav-active inactiveLink');
+                        element.siblings('li').children('a').removeClass('nav-link-active');
+                        elementh.siblings('li').children('a').removeClass('nav-link-active');
+                        element.addClass('nav-active inactiveLink');
+                        elementh.addClass('nav-active inactiveLink');
+                        element.children('a').addClass("nav-link-active");
+                        elementh.children('a').addClass("nav-link-active");
+                    }
+                });
+                //desktop navbar scroll animation
+                $('#nav-container ul>li.nav-box>a').on('click', function () {
+                    var href = $(this).attr('href');
+                    jQuery('html,body').animate({
+                        scrollTop: jQuery(href).offset().top
+                    }, 300);
+                });
+
+                //mobile navbar scroll animation
+                $('#nav-container-mobile ul>li>a').on('click', function () {
+                    var href = $(this).attr('href');
+                    jQuery('html,body').animate({
+                        scrollTop: jQuery(href).offset().top
+                    }, 300);
+                });
+                $('#nav-indicator-link').on('click', function () {
+                    var href = $(this).attr('href');
+                    jQuery('html,body').animate({
+                        scrollTop: jQuery(href).offset().top
+                    }, 300);
+                });
+            });
+        })(jQuery);
+    </script>
+<style>
+        /* basics  */
+
+            body {
+                font-family: 'Open Sans', sans-serif !important;
+            }
+
+            a {
+                color: #23637c;
+            }
+
+            a:hover {
+                color: #23637c;
+            }
+
+            h2 {
+                color: #23637c;
+            }
+
+            h4 {
+                color: #23637c;
+            }
+
+            hr {
+                border-color: #aeaeae;
+            }
+
+            i {
+                padding: 0px 1px 0px 1px;
+            }
+
+            .header {
+                font-size: 50px;
+            }
+
+    /* Navigation */
+
+        /* Desktop */
+
+            #Navigation {
+                position: absolute;
+                background: #292929;
+                width: 100px;
+                right: 25px;
+                z-index: 5;
+                visibility: visible;
+                border-radius: 5px;
+            }
+
+            .nav-float {
+                top: 5vh;
+                position: fixed !important;
+            }
+
+            .nav-scroll {
+                position: absolute;
+                border-radius: 0 !important;
+            }
+
+            .nav-link-desktop {
+                padding: 0;
+                width: 100%;
+            }
+
+            #nav-container {
+                width: 100%;
+                padding: 0;
+            }
+
+            .nav-link-container-desktop {
+                padding: 30px 2px 30px 2px;
+                width: 100%;
+            }
+
+            .nav-list {
+                margin: 0;
+            }
+
+            .nav-box {
+                margin: 0;
+                width: 100%;
+            }
+
+        /* Mobile */
+
+            #nav-container-mobile {
+                width: 100%;
+                height: 80px;
+                padding: 0 5px;
+                background: #292929;
+                visibility: hidden;
+                z-index: 5;
+            }
+
+            .nav-float-mobile {
+                top: 0;
+                position: fixed !important;
+            }
+
+            .nav-link-container-mobile {
+                height: 100%;
+            }
+
+        /* Links */
+
+            .nav-link {
+                color: #aeaeae;
+            }
+
+            .nav-link:focus {
+                color: #aeaeae;
+                text-decoration: none;
+            }
+
+            .nav-link:hover {
+                color: white;
+                text-decoration: none;
+            }
+
+            .nav-link-active {
+                color: white;
+            }
+
+            .nav-active {
+                background: #d31313;
+                border-radius: 5px;
+            }
+
+        /* Navbar indicators */
+
+            #nav-indicator {
+                position: absolute;
+                float: right;
+                width: 100px;
+                height: 100px;
+                top: calc(100vh - 100px);
+                right: 25px;
+                z-index: 4;
+                background: #292929;
+                font-size: 75px;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                visibility: visible;
+            }
+
+            .nav-indicator-anim {
+                animation: MoveUpDown 1s linear infinite;
+                -moz-animation: MoveUpDown 1s linear infinite;
+                -webkit-animation: MoveUpDown 1s linear infinite;
+                -o-animation: MoveUpDown 1s linear infinite;
+                -ms-animation: MoveUpDown 1s linear infinite;
+            }
+
+            @keyframes MoveUpDown {
+                0% {
+                    padding-top: 0;
+                }
+
+                50% {
+                    padding-top: 10px;
+                }
+
+                100% {
+                    padding-top: 1px;
+                }
+            }
+
+            @-moz-keyframes MoveUpDown {
+                0% {
+                    padding-top: 0;
+                }
+
+                50% {
+                    padding-top: 10px;
+                }
+
+                100% {
+                    padding-top: 1px;
+                }
+            }
+
+            @-webkit-keyframes MoveUpDown {
+                0% {
+                    padding-top: 0;
+                }
+
+                50% {
+                    padding-top: 10px;
+                }
+
+                100% {
+                    padding-top: 1px;
+                }
+            }
+
+            @-o-keyframes MoveUpDown {
+                0% {
+                    padding-top: 0;
+                }
+
+                50% {
+                    padding-top: 10px;
+                }
+
+                100% {
+                    padding-top: 1px;
+                }
+            }
+
+            @-ms-keyframes MoveUpDown {
+                0% {
+                    padding-top: 0;
+                }
+
+                50% {
+                    padding-top: 10px;
+                }
+
+                100% {
+                    padding-top: 1px;
+                }
+            }
+
+    /* Landing */
+
+            #Landing {
+                background: no-repeat center right fixed url("assets/images/landing-bg.jpg");
+                background-size: cover;
+                position: relative;
+                height: 100%;
+                height: 100vh;
+                margin: 0;
+                overflow: hidden;
+               
+            }
+
+            .landing-text {
+                position: absolute;
+                margin-top: 35vh;
+                z-index: 2;
+                color: white;
+            }
+
+            .landing-main-txt {
+                font-weight: bold;
+                font-size: 60px;
+            }
+
+            .landing-hr {
+                width: 35em;
+                transition: ease-in-out .2s;
+                border-color: white !important;
+            }
+
+            .landing-subtitle {
+                color: white;
+            }
+
+            .landing-overlay {
+                background-color: #1b4f63;
+                position: absolute;
+                opacity: 0.3;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+
+    /* Profile */
+
+            #Profile {
+                background: white;
+                padding: 50px 0px 50px 0px;
+                width: inherit;
+                margin: 0;
+            }
+
+            #profile-img {
+                border-style: solid;
+                border-color: #dedede;
+                border-width: 10px;
+                border-radius: 50%;
+            }
+
+            .profile-font {
+                font-size: 20px;
+            }
+
+    /* Experience */
+
+            #Experience {
+                background: #dedede;
+                padding: 50px 0px 50px 0px;
+                width: inherit;
+                margin: 0;
+            }
+
+            .table {
+                border: none;
+            }
+
+            .table tbody>tr>th {
+                border: none;
+            }
+
+            table>tbody>tr>th>h5>ul>li {
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .exp-dates {
+                font-weight: bold;
+                display: table-cell;
+                vertical-align: middle;
+                float: none;
+                border-style: solid;
+                border: 0px 0px 10px 0px;
+                border-color: black;
+            }
+
+            #Skills {
+                background: white;
+                padding: 50px 0px 50px 0px;
+                width: inherit;
+                margin: 0;
+            }
+
+            .fa-star {
+                color: #23637c !important;
+            }
+
+            .star-off {
+                color: #aeaeae !important;
+                font-size: .95em;
+            }
+
+    /* Project */
+
+            #Project {
+                background: #dedede;
+                padding: 50px 0px 50px 0px;
+                width: inherit;
+                margin: 0;
+            }
+
+            .project-overlay {
+                width: calc(100% - 30px);
+                height: 100%;
+                color: white;
+                margin: 0;
+                padding: 10px;
+                background: #23637c;
+                position: absolute;
+                opacity: 0;
+                transition: opacity ease-in 0.2s;
+            }
+
+            .project-thumb-cs {
+                border: 5px dashed #23637c;
+            }
+
+            .project-overlay:hover {
+                opacity: .8;
+            }
+
+            .project-hr {
+                width: 80%;
+            }
+
+    /* Contact */
+
+            #Contact {
+                background: #292929;
+                padding: 50px 0px 300px 0px;
+                width: inherit;
+                margin: 0;
+                color: #aeaeae;
+            }
+
+            .contact-link {
+                color: #aeaeae;
+                font-size: 20px;
+            }
+
+            .contact-header {
+                color: #aeaeae;
+                font-size: 50px;
+            }
+
+            .inactiveLink {
+                pointer-events: none;
+                cursor: default;
+            }
+
+    /* Media Queries */
+
+            @media only screen and (max-width: 1200px) {
+                #left-profile {
+                    margin-bottom: 25px;
+                    text-align: center !important;
+                }
+
+                #right-profile {
+                    margin-top: 50px;
+                    text-align: center !important;
+                }
+                .second-project {
+                    margin-top: 20px;
+                }
+            }
+
+            @media only screen and (max-width: 992px) {
+                .header {
+                    margin-top: 50px;
+                }
+
+                .landing-hr {
+                    width: 15em;
+                }
+
+                #Navigation {
+                    visibility: hidden;
+                }
+                #nav-indicator {
+                    width: 100%;
+                    right: 0;
+                    border-radius: 0;
+                }
+
+                #nav-container-mobile {
+                    visibility: visible;
+                }
+
+                #nav-indicator-mobile {
+                    visibility: visible;
+                }
+
+            }
+
+            @media only screen and (max-width: 768px) {}
+
+    /* Browser Specific CSS */
+
+            .Chrome,
+            .MSIE,
+            .Safari,
+            .Opera {
+                height: 25px !important;
+            }
+
+            .Firefox {
+                height: 100% !important;
+            }
+
+    /* End of CSS */
+    </style>
+</head>
+
+<body>
+    <!-- Landing Section -->
+    <div class="row" id="Landing">
+        <div class="col-xs-12 col-lg-12 text-center align-items-center landing-text">
+            <h1 class="landing-main-txt">Swapnil Nikule</h1>
+            <hr class="landing-hr">
+            <h3 class="landing-subtitle">Interactive Resume</h3>
+        </div>
+        <div class="landing-overlay"></div>
+        <a href="#Profile" style="color:white;" id="nav-indicator-link">
+            <div class="text-center" id="nav-indicator">
+                <i class="fas fa-angle-down nav-indicator-anim"></i>
+            </div>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <div class="" id="Navigation">
+        <div class="container center-block" id="nav-container">
+            <ul class="list-unstyled nav-list">
+                <li class="nav-box text-center" id="nav-profile-link">
+                    <a class="nav-link nav-link-desktop" href="#Profile">
+                        <div class="nav-link-container-desktop">Profile</div>
+                    </a>
+                </li>
+                <li class="row nav-box text-center" id="nav-experience-link">
+                    <a class="nav-link nav-link-desktop" href="#Experience">
+                        <div class="nav-link-container-desktop">Experience</div>
+                    </a>
+                </li>
+                <li class="row nav-box text-center" id="nav-skills-link">
+                    <a class="nav-link nav-link-desktop" href="#Skills">
+                        <div class="nav-link-container-desktop">Skills</div>
+                    </a>
+                </li>
+                <li class="row nav-box text-center" id="nav-project-link">
+                    <a class="nav-link nav-link-desktop" href="#Project">
+                        <div class="nav-link-container-desktop">Projects</div>
+                    </a>
+                </li>
+                <li class="row nav-box text-center" id="nav-contact-link">
+                    <a class="nav-link nav-link-desktop" href="#Contact">
+                        <div class="nav-link-container-desktop">Contact</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="navbar navbar-expand nav-pill navbar-dark" id="nav-container-mobile" role="navigation">
+        <div class="container-fluid">
+            <ul class="nav nav-fill w-100">
+                <li class="nav-item" id="nav-profile-link-mobile">
+                    <a class="nav-link" href="#Profile">
+                        <div class="nav-link-container-mobile">Profile</div>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-experience-link-mobile">
+                    <a class="nav-link" href="#Experience">
+                        <div class="nav-link-container-mobile">Experience</div>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-skills-link-mobile">
+                    <a class="nav-link" href="#Skills">
+                        <div class="nav-link-container-mobile">Skills</div>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-project-link-mobile">
+                    <a class="nav-link" href="#Project">
+                        <div class="nav-link-container-mobile">Projects</div>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav-contact-link-mobile">
+                    <a class="nav-link" href="#Contact">
+                        <div class="nav-link-container-mobile">Contact</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="row" id="Profile">
+        <div class="col-12">
+            <h2 class="text-center header">Profile</h2>
+            <br />
+        </div>
+        <div class="col-8 col-sm-8 col-lg-3 offset-2 offset-sm-2 offset-lg-2 text-right" id="left-profile">
+            <h2>About</h2>
+            <p class="profile-font">I am doing my graduation in Information Technology Engineering program at Nagpur University.</p>
+        </div>
+        <div class="col-xs-8 col-sm-12 col-lg-2 offset-xs-2 offset-sm-0 profile-img align-items-center">
+            <img class="img-fluid mx-auto d-block" id="profile-img" src="assets\images\me2.jpg" alt="Swapnil Nikule"/>
+        </div>
+        <div class="col-xs-8 col-sm-12 col-lg-4 offset-xs-2 offset-sm-0 text-left" id="right-profile">
+            <h2>Details</h2>
+            <p class="profile-font">
+                <b>Name:</b>
+                <br/> Swapnil Damodhar Nikule
+                <br/>
+                <b>Age:</b>
+                <br/> 21 Years
+                <br/>
+                <b>Location:</b>
+                <br/> Nagpur, India
+            </p>
+        </div>
+    </div>
+
+    <!-- Experience Section -->
+    <div class="row" id="Experience">
+        <div class="col-12">
+            <h2 class="text-center header">Experience</h2>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-lg-6 offset-sm-2 offset-lg-3">
+            <hr>
+            <h4>Education</h4>
+            <table class="table">
+                <tr>
+                    <th>Nagpur University
+                        <br />
+                        <h5>July 2017- MAY 2021</h5>
+                    </th>
+                    <th>B.E Information Technology Engineering
+                        <br />
+                        <h5>Designed and developed an embedded wireless monitoring system to monitor the vital statistics of
+                            cattle.</h5>
+                    </th>
+                </tr>
+            </table>
+            <hr>
+            <h4>Careers</h4>
+            <table class="table exp-table">
+                <tr>
+                    <th>Texas A&M University
+                        <br />
+                        <h5>September 2014 - October 2017</h5>
+                    </th>
+                    <th>Student Technician
+                        <br />
+                        <h5>
+                            <ul>
+                                <li>Troubleshot both software and hardware problems on both Windows (Dell) and Apple computers</li>
+                                <li>Documented and organized Inventory for departmental property</li>
+                                <li>Assisted in the development of software tools used to increase inventory efficiency</li>
+                                <li>Prepared surplus hardware for release within state security specifications</li>
+                                <li>Managed academic specific software packages</li>
+                                <li>Maintained 30 computers for student access lab</li>
+                                <li>Created and maintained Windows images deployed to over 100 workstations</li>
+                                <li>Set up and maintained group policy objects for multiple user-groups across Windows 7 and
+                                    Windows 10</li>
+                                <li>Created documentation for use of the Windows Automated Installation Kit to ensure proper
+                                    migration of Windows user accounts</li>
+                            </ul>
+                        </h5>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Chrysalis Premier Productions
+                        <br />
+                        <h5>March - August 2014</h5>
+                    </th>
+                    <th>Assistant Director of Information Technology
+                        <br />
+                        <h5>
+                            <ul>
+                                <li>Supported workstation and POS systems</li>
+                                <li>Provided instruction on fundamental troubleshooting and diagnostic skills</li>
+                                <li>Advised management on matters regarding electronics and communications</li>
+                            </ul>
+                        </h5>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Seabrook Seafood Inc
+                        <br />
+                        <h5>2012-2013</h5>
+                    </th>
+                    <th>Senior Technical Support Technician
+                        <br />
+                        <h5>
+                            <ul>
+                                <li>Assessed and handled all workstation and network equipment issues</li>
+                                <li>Assisted with computer and technical questions</li>
+                                <li>Replaced or rebuilt workstations and other related equipment</li>
+                                <li>Instructed colleagues on fundamental computer troubleshooting and diagnostic step</li>
+                                <li>Provided instruction on fundamental troubleshooting and diagnostic skills</li>
+                                <li>Advised management on matters regarding electronics and communications</li>
+                            </ul>
+                        </h5>
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="row" id="Skills">
+        <div class="col-12">
+            <h2 class="text-center header">Skills</h2>
+        </div>
+        <div class="col-xs-10 col-sm-8 offset-xs-1 offset-sm-2 skill-tables">
+            <hr>
+            <h4>Programming Languages</h4>
+            <div class="row">
+                <div class="col-lg-6">
+                    <table class="table">
+                        <tr>
+                            <th class="col-xs-6">
+                                <h6>CSS</h6>
+                            </th>
+                            <th class="col-xs-6 text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>HTML(5)</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <h6>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>C</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>Javascript</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>Twitter Bootstrap</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <h6>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                    </h6>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th>
+                                <h6>CLI</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <h6>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star "></i>
+                                        <i class="fas fa-star star-off"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                    </h6>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <table class="table">
+                        <tr>
+                            <th class="col-xs-6">
+                                <h6>Java</h6>
+                            </th>
+                            <th class="col-xs-6 text-right">
+                                <h6>
+                                    <h6>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                    </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>JQuery</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <h6>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                    </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>MySQL</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <h6>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                    </h6>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th>
+                                <h6>NodeJS</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>PHP</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>Python</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <h6>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                    </h6>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 text-center">
+                <p>This webpage was built using HTML5, Bootstrap 4, and JQuery.
+                    <br />See the source on my
+                    <a href="https://github.com/RyantHults/resume-page"  rel="noopener" >GitHub!</a>
+                </p>
+            </div>
+            <hr>
+            <h4>Tools</h4>
+            <div class="row">
+                <div class="col-lg-6">
+                    <table class="table">
+                        <tr>
+                            <th class="col-xs-6">
+                                <h6>MS Office (8 years)</h6>
+                            </th>
+                            <th class="col-xs-6 text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>Windows (8 years)</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <h6>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>Adobe Photoshop (6 years)</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>Code Composer Studio (3 years)</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                <h6>Microsoft Active Directory (3 years)</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-xs-6">
+                                <h6>Microsoft Visio (3 years)</h6>
+                            </th>
+                            <th class="col-xs-6 text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>Notepad++ (4 years)</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <h6>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                        <i class="fas fa-star star-off"></i>
+                                    </h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h6>Visual Studio Code (1 year)</h6>
+                            </th>
+                            <th class="text-right">
+                                <h6>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                    <i class="fas fa-star star-off"></i>
+                                </h6>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br />
+
+    </div>
+
+    <!-- project Section -->
+    <div class="row" id="Project">
+        <div class="col-12">
+            <h2 class="text-center header">Projects</h2>
+        </div>
+        <div class="col-xs-12 col-sm-8 offset-sm-2">
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-lg">
+                    <a href="https://github.com/swapnilnikule/myfirstdocker"  rel="noopener" >
+                        <div class="project-overlay align-content-center text-center">
+                            <h3>Docker</h3>
+                            <hr class="project-hr">
+                            <p>Personal Cloud running on Docker containers having a one click setup functionality using Docker-Compose</p>
+                        </div>
+                    </a>
+                    <img class="img-fluid" src="https://raw.githubusercontent.com/swapnilnikule/myfirstdocker/master/Screenshots/Screenshot%202.png" />
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="row" id="Contact">
+        <div class="col-12">
+            <h2 class="contact-header text-center">Contact</h2>
+        </div>
+        <div class="col-xs-12 col-lg-6 offset-lg-3" id="contact-column">
+            <hr>
+            <div class="row">
+                <div class="col-xs-12 col-lg-6 text-center">
+                    <a href="mailto:swapnilnikule@13@gmail.com"  rel="noopener"  class="contact-link">
+                        <i class="fas fa-envelope"></i> Mail Me </a>
+                </div>
+                <div class="col-xs-12 col-lg-6 text-center">
+                    <a href="https://www.linkedin.com/in/swapnilnikule/"  rel="noopener"  class="contact-link">
+                        <i class="fab fa-linkedin"></i> Linkedin.com/in/swapnilnikule</a>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-lg-6 text-center">
+                    <a href="https://github.com/swapnilnikule"  rel="noopener"  class="contact-link">
+                        <i class="fab fa-github"></i> github.com/swapnilnikule</a>
+                </div>
+                <div class="col-xs-12 col-lg-6 text-center">
+                    <a href="https://twitter.com/NikuleSwapnil"  rel="noopener"  class="contact-link">
+                        <i class="fab fa-twitter-square"></i> twitter.com/NikuleSwapnil</a>
+                </div>
+            </div>
+            <hr>
+            <br />
+            <div class="col-12 text-center">
+                <h5>© Swapnil Nikule | v2.5 | Inspired by:
+                    <a href="http://www.pascalvangemert.nl/"  rel="noopener" class="contact-link">Pascal Van Gemert</a>
+                </h5>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
